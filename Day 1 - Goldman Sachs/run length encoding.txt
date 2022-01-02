@@ -1,0 +1,25 @@
+
+Problem name : Run length encoding
+Problem link : https://practice.geeksforgeeks.org/problems/run-length-encoding/1/
+
+string encode(string src)
+{     
+  int n=src.size();
+  string ans;
+  int i,c=0;
+  char prev,curr;
+  for( i=0;i<n;i++)
+  {   if(i>=1)
+      { prev=src[i-1];
+       curr=src[i];}
+      if(prev==curr || i==0)
+      c++;
+      else
+      {ans+=src[i-1]+to_string(c);
+      c=1;}
+      
+  }
+  ans+=src[i-1]+to_string(c);
+  return ans;
+  
+} 
