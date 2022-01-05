@@ -1,0 +1,26 @@
+Problem Name : Greatest Common Divisor of strings
+Problem link :https://leetcode.com/problems/greatest-common-divisor-of-strings/
+
+Code :
+
+class Solution {
+public:
+    int gcd(int a,int b)
+    {
+        if(b%a==0)
+            return a;
+        return gcd(b%a,a);
+    }
+    string gcdOfStrings(string str1, string str2) {
+       int m=str1.size();
+       int n=str2.size();
+        if(str1+str2==str2+str1)
+       {
+           int len=gcd(m,n);
+           string ans=str2.substr(0,len);
+            return ans;
+       }
+        else return "";
+        
+  }
+};

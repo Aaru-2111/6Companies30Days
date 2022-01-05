@@ -1,0 +1,31 @@
+
+Problem Name : Ugly Number II
+Problem Link : https://leetcode.com/problems/ugly-number-ii/
+
+Code : 
+
+class Solution {
+public:
+    int nthUglyNumber(int n) {
+        vector<int> ans;
+        ans.push_back(1);
+        int i=0,j=0,k=0;
+        while(n>1)
+            {
+             int a=2*ans[i];
+             int b=3*ans[j];
+             int c=5*ans[k];
+             int x=min({a,b,c});
+            cout<<x<<endl;
+             ans.push_back(x);
+             
+             if(x==a) i++;
+             if(x==b) j++;
+             if(x==c) k++;
+             n--;
+            
+            }
+            return ans.back();
+    }
+};
+            
