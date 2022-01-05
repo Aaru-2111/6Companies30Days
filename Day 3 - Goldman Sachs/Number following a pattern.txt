@@ -1,0 +1,135 @@
+Problem Name: Number following a pattern
+Problem Link: https://practice.geeksforgeeks.org/problems/number-following-a-pattern3126/1
+
+Code:
+
+Approach 1 : Using vector 
+#include<bits/stdc++.h> 
+using namespace std; 
+class Solution{   
+public:
+    string printMinNumberForPattern(string s){
+        int n=s.size();
+        string str="";
+        vector<int> ans(n+1,0);
+        int mini=1;
+        int c=0;
+        for(int i=0;i<n;i++)
+        {
+            if(s[i]=='I')
+            {
+                int j=i;
+                while(j>=0 && ans[j]==0)
+                {
+                  ans[j]=mini;
+                  mini++;
+                  j--;
+                }
+                c++;
+            }
+            else 
+            continue;
+        }
+        if(c==0)
+        {    int k=1;
+            for(int i=n;i>=0;i--)
+            ans[i]=k++;}
+            
+        else
+        {int pos;
+        for(int i=0;i<=n;i++)
+        {
+            if(ans[i]==0)
+            pos=i;
+            
+        }
+        while(ans[pos]==0)
+        {
+            ans[pos]=mini;
+            mini++;
+            pos--;
+        }}
+        
+        for(int i=0;i<=n;i++)
+        str+=to_string(ans[i]);
+        return str;
+        
+    }
+};
+
+
+// { Driver Code Starts.
+int main() 
+{ 
+    int t;
+    cin>>t;
+    while(t--)
+    {
+        string S;
+        cin >> S;
+        Solution ob;
+        cout << ob.printMinNumberForPattern(S) << endl;
+    }
+    return 0; 
+} 
+  // } Driver Code Ends
+
+Approach 2: Using stack
+
+#include<bits/stdc++.h> 
+using namespace std; 
+
+ // } Driver Code Ends
+class Solution{   
+public:
+    string printMinNumberForPattern(string s){
+        int n=s.size();
+        string str="";
+        stack<int> stk;
+        stk.push(1);
+        int k=1;
+        for(int i=0;i<n;i++)
+        {
+            if(s[i]=='D')
+            {
+                k++;
+                stk.push(k);
+            }
+            else
+            {
+                
+                while(!stk.empty())
+                {
+                    str+=to_string(stk.top());
+                    stk.pop();
+                }
+                k++;
+                stk.push(k);
+            }
+        }
+        while(!stk.empty())
+        {
+             str+=to_string(stk.top());
+             stk.pop();
+        }
+        return str;
+        
+        
+        
+    }
+};
+// { Driver Code Starts.
+int main() 
+{ 
+    int t;
+    cin>>t;
+    while(t--)
+    {
+        string S;
+        cin >> S;
+        Solution ob;
+        cout << ob.printMinNumberForPattern(S) << endl;
+    }
+    return 0; 
+} 
+  // } Driver Code Ends
