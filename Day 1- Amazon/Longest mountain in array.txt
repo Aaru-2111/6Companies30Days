@@ -1,0 +1,28 @@
+Problem Name: Longest Mountain in Array
+Problem Link: https://leetcode.com/problems/longest-mountain-in-array/
+
+Code:
+
+class Solution {
+public:
+    int longestMountain(vector<int>& arr) {
+        int n=arr.size();
+        int left,right,maxi=0;
+        for(int i=0;i<n;i++)
+        {   left=i;
+            right=i;
+            while(left>=1 && arr[left]>arr[left-1])
+             left--;
+             
+            while(right<n-1 && arr[right]>arr[right+1])
+                right++;
+         maxi=max(maxi,right-left+1);
+        }
+        if(maxi<3)
+            return 0;
+         return maxi;
+    }
+};
+
+TC: O(n^2)
+SC: O(1)
