@@ -1,0 +1,41 @@
+Problem name :Minimum Size Subarray Sum
+Problem Link: https://leetcode.com/problems/minimum-size-subarray-sum/
+
+Code:
+class Solution {
+public:
+    int minSubArrayLen(int t, vector<int>& nums) {
+        
+        int n=nums.size();
+        int sum=0;
+        vector<int> ps;
+        ps.push_back(0);
+        int len=INT_MAX;
+        for(int i=0;i<n;i++)
+        {
+            sum+=nums[i];
+            ps.push_back(sum);
+        }
+        int i=0,j=0;
+        while(i<=j && i<n+1 && j<n+1)
+        {
+            if((ps[j]-ps[i])>=t)
+            {
+                len=min(len,j-i);
+                i++;
+             }
+            else
+            {
+                j++;
+            }
+        }
+        if(len==INT_MAX)
+            return 0;
+        return len;
+        
+        
+    }
+};
+
+TC: O(N)
+SC: O(N)

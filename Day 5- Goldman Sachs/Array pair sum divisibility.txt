@@ -1,0 +1,81 @@
+Problem Name: Array pair sum divisibility problem
+Problem Link:https://practice.geeksforgeeks.org/problems/array-pair-sum-divisibility-problem3257/1#
+
+Code:
+
+#include <bits/stdc++.h>
+using namespace std;
+
+ // } Driver Code Ends
+class Solution {
+  public:
+    bool canPair(vector<int> nums, int k) {
+        int n=nums.size();
+        for(int i=0;i<n;i++)
+        {
+            nums[i]%=k;
+        }
+        map<int,int> m;
+        for(int i=0;i<n;i++)
+        m[nums[i]]++;
+        
+        for(auto it:m)
+        {   auto pos=m.find((k-it.first)%k);
+            if(pos==m.end())
+            return false;
+            else
+            {
+                if(it.first==pos->first)
+                {
+                    if((it.second)%2==0)
+                    m.erase(it.first);
+                    else return false;
+                }
+                
+                else{
+                if(pos->second==it.second)
+                {
+                    m.erase(pos->first);
+                    m.erase(it.first);
+                }
+                else if(pos->second>it.second)
+                {
+                    
+                    pos->second-=it.second;
+                    m.erase(it.first);
+                }
+                else if(pos->second<it.second)
+                {
+                    it.second-=pos->second;
+                    m.erase(pos->first);
+                }}
+                
+             }
+        }
+        if(m.size()==0)
+        return true;
+        return false;
+    }
+};
+
+// { Driver Code Starts.
+int main() {
+    int tc;
+    cin >> tc;
+    while (tc--) {
+        int n, k;
+        cin >> n >> k;
+        vector<int> nums(n);
+        for (int i = 0; i < nums.size(); i++) cin >> nums[i];
+        Solution ob;
+        bool ans = ob.canPair(nums, k);
+        if (ans)
+            cout << "True\n";
+        else
+            cout << "False\n";
+    }
+    return 0;
+}  // } Driver Code Ends
+
+TC: O(n)
+SC: O(n)

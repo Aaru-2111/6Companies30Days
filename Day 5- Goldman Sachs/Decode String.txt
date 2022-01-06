@@ -1,0 +1,58 @@
+Problem Name: Decode String
+Problem Link: https://leetcode.com/problems/decode-string/
+
+Code:
+class Solution {
+public:
+    string decodeString(string s) {
+        int n=s.size();
+        stack<char> stk;
+        string temp="";
+        string num="";
+        string temp2="";
+        string ans="";
+        
+        for(int i=0;i<n;i++)
+        {
+            if(s[i]==']')
+            {
+               while(!stk.empty() && stk.top()!='[')
+                { temp+=stk.top();
+                   stk.pop();
+                }
+                stk.pop();
+               while(!stk.empty() && isdigit(stk.top()) )
+               {
+                   num+=stk.top();
+                   stk.pop();
+               }
+            reverse(num.begin(),num.end());
+               int x=stoi(num);
+               for(int i=1;i<=x;i++)
+               temp2+=temp;
+                
+               reverse(temp2.begin(),temp2.end());
+                
+                for(int i=0;i<temp2.size();i++)
+                   stk.push(temp2[i]);
+               
+               temp2="";
+               temp="";
+               num="";
+            }
+            else 
+            stk.push(s[i]);
+        }
+        
+        while(!stk.empty())
+        { ans+=stk.top();
+         stk.pop();
+        }
+        reverse(ans.begin(),ans.end());
+        return ans;
+    }
+        
+};
+
+TC: O(n)
+SC: O(n)
