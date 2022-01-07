@@ -1,0 +1,38 @@
+Problem Name: Column name from a given number
+Problem Link: https://practice.geeksforgeeks.org/problems/column-name-from-a-given-column-number4244/1/#
+
+Code: 
+
+#include<bits/stdc++.h>
+using namespace std;
+class Solution{
+    public:
+    string colName (long long int n)
+    {   string ans="";
+        while(n>0)
+        {
+            n--;
+            int x=n%26;
+            char y=char(x+65);
+            ans=y+ans;
+            n/=26;
+        }
+        return ans;
+    }
+};
+
+// { Driver Code Starts.
+int main()
+{
+    int t; cin >> t;
+    while (t--)
+	{
+		long long int n; cin >> n;
+		Solution ob;
+		cout << ob.colName (n) << '\n';
+	}
+}
+  // } Driver Code Ends
+
+TC: O(n)
+SC: O(1)
